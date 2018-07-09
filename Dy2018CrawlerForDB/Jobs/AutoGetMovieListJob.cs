@@ -10,10 +10,9 @@ using Pomelo.AspNetCore.TimedJob;
 
 namespace Dy2018CrawlerForDB.Jobs
 {
-    public class AutoGetMovieListJob:Job
+    public class AutoGetMovieListJob : Job
     {
-       
-        [Invoke(Begin = "2016-01-15 9:30", Interval = 1000 * 3600*6, SkipWhileExecuting =true)]
+        [Invoke(Begin = "2016-01-15 9:30", Interval = 1000 * 10, SkipWhileExecuting = true)]
         public void Run()
         {
             LogHelper.Info("Start crawling");
@@ -22,7 +21,5 @@ namespace Dy2018CrawlerForDB.Jobs
             Dy2018MovieCrawler.CrawlMovieInfo();
             LogHelper.Info("Finish crawling");
         }
-
-    
     }
 }

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Hot Movie";
 }
-@model List<Dy2018CrawlerWithDB.Models.MovieInfo>
+@model List<Dy2018CrawlerForDB.Models.MovieInfo>
 
 <div class="row">
     <div class="col-md-5">
@@ -11,29 +11,31 @@
             {
                 <li><a href="@(Url.Action("ShowMoiveDetail")+"?onlineURL="+@movie.OnlineUrl)" target="_blank">@movie.MovieName</a></li>
             }
-           
         </ul>
     </div>
     <div class="col-md-7">
         <h2>DownLoadURL</h2>
         <ul>
-           @foreach (var movie in Model)
-           {
-                <li><a href="@movie.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"))" 
-                       target="_blank">@{ 
-                           var downloadURL = movie.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"));
-                           if (String.IsNullOrEmpty(downloadURL))
-                           {
-                              <span>@movie.DownLoadURLList.FirstOrDefault()</span>
+            @foreach (var movie in Model)
+            {
+                <li>
+                    <a href="@movie.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"))"
+                       target="_blank">
+                        @{
+                            var downloadURL = movie.DownLoadURLList.Split(';').FirstOrDefault(item => item.Contains("ftp"));
+                            if (String.IsNullOrEmpty(downloadURL))
+                            {
+                                <span>@movie.DownLoadURLList.FirstOrDefault()</span>
 
-                           }
-                           else
-                           {
-                            <span>@downloadURL</span>
-                           }
+                            }
+                            else
+                            {
+                                <span>@downloadURL</span>
+                            }
                     }
-                    </a></li>
-           }
+                </a>
+            </li>
+        }
         </ul>
     </div>
 </div>

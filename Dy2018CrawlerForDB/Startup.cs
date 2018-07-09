@@ -32,12 +32,16 @@ namespace Dy2018CrawlerForDB
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddTimedJob();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             env.ConfigureNLog(Path.Combine(env.WebRootPath, "nlog.config"));
+
+            app.UseTimedJob();
 
             if (env.IsDevelopment())
             {
@@ -58,14 +62,12 @@ namespace Dy2018CrawlerForDB
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ConstsConf.WWWRootPath = env.WebRootPath;
 
             ConstsConf.MySQLConnectionString = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
            .AddJsonFile("appsettings.json").Build()["ConnectionStrings:MySQLConnectionString"];
-
         }
     }
 }
