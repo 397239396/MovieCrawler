@@ -13,13 +13,12 @@ namespace Dy2018CrawlerForDB.Data
     {
         public DbSet<MovieInfo> Movies { set; get; }
 
-        public DbSet<CrawlerConfigconfiguration> CrawlerConfigurations { get; set; }
+        public DbSet<tb_User> tb_User { set; get; }
 
+        public DbSet<CrawlerConfigconfiguration> CrawlerConfigurations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
           => optionsBuilder
           .UseMySql(ConstsConf.MySQLConnectionString);
-
-
     }
 }
